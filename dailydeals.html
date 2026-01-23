@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Deals - دليل العروض | Medlytics-Solutions</title>
+    <meta name="description" content="Comprehensive digital catalogue platform for Egyptian supermarkets - Browse offers, compare prices, and save money">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #dc2626;
+            --primary-dark: #b91c1c;
+            --secondary: #059669;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Content Section */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-description {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Tech Stack */
+        .tech-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .tech-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-category h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--gray);
+        }
+
+        .tech-list li:before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Architecture */
+        .architecture-diagram {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .flow-step {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .flow-step h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-step p {
+            color: var(--gray);
+        }
+
+        /* Use Cases */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .use-case {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #d1fae5;
+        }
+
+        .use-case h4 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .use-case ol {
+            margin-left: 1.5rem;
+            color: var(--gray);
+        }
+
+        .use-case ol li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .roadmap-phase {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .roadmap-phase:last-child {
+            border-bottom: none;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .phase-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .phase-progress {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .phase-planned {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .phase-items {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .phase-items li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .phase-items li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .features-grid,
+            .use-cases,
+            .tech-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="back-link">
+                ← Back to Portfolio
+            </a>
+            <div class="logo">Daily Deals - دليل العروض</div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="project-badge">🎯 Flagship Retail Solution</div>
+            <h1>Daily Deals - دليل العروض</h1>
+            <p class="subtitle">Egypt's Premier Digital Catalogue Platform</p>
+            <p class="description">
+                A comprehensive mobile and web application that brings together promotional offers from Egyptian supermarket chains into one unified platform, helping consumers save money and shop smarter.
+            </p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Live Demo</a>
+                <a href="#features" class="btn btn-secondary">Explore Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Overview Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Active Users</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Store Partners</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Catalogues</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">20+</span>
+                <span class="stat-label">Cities Covered</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Governorates</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Offline Support</span>
+            </div>
+        </div>
+
+        <!-- Problem & Solution -->
+        <section class="section">
+            <h2 class="section-title">Problem & Solution</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">❌</div>
+                    <h3 class="feature-title">The Problem</h3>
+                    <p class="feature-description">
+                        Egyptian shoppers struggle with scattered promotional information across multiple stores, paper flyers that get lost, and no easy way to compare offers across different supermarkets. Price-conscious families waste time visiting multiple stores or miss out on deals entirely.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3 class="feature-title">Our Solution</h3>
+                    <p class="feature-description">
+                        Daily Deals aggregates all supermarket catalogues in one app with smart filtering by location, real-time offer tracking, and a unified shopping basket. Users can browse offers offline, save favorites, and never miss a deal - all with full Arabic RTL support tailored for Egyptian shopping habits.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features -->
+        <section class="section" id="features">
+            <h2 class="section-title">Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Digital Catalogue Browser</h3>
+                    <p class="feature-description">
+                        Interactive PDF and image viewer with pinch-to-zoom, swipe navigation, fullscreen mode, and direct page jumping. Automatic PDF-to-image conversion for seamless browsing.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3 class="feature-title">Location-Based Filtering</h3>
+                    <p class="feature-description">
+                        Filter offers by governorate (Sharkia, Dakahlia, Cairo) and city level. Automatically distinguishes between national chains and local stores with Firebase sync.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3 class="feature-title">Smart Shopping Basket</h3>
+                    <p class="feature-description">
+                        Multi-store cart with quantity management, price estimation, automatic expired item detection, and saved catalogue pages for reference.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3 class="feature-title">Favorites System</h3>
+                    <p class="feature-description">
+                        Follow favorite stores and subscribe to product categories. Unified view of all favorites organized by category or store, synced across devices.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Advanced Search</h3>
+                    <p class="feature-description">
+                        Multi-type search across stores, catalogues, offers, and categories. Real-time results with intelligent caching and tabbed interface for filtering.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏪</div>
+                    <h3 class="feature-title">Store Information</h3>
+                    <p class="feature-description">
+                        Interactive maps showing all branches, contact details, opening hours, and Google Maps integration for directions. View catalogue history per store.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3 class="feature-title">Offer Management</h3>
+                    <p class="feature-description">
+                        Automated offer extraction from catalogues with category system, price tracking (original vs. offer), and real-time countdown for expiration.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Multilingual Support</h3>
+                    <p class="feature-description">
+                        Full Arabic RTL support with English language option. Dynamic switching, persistent preferences, and culturally adapted UI for Egyptian users.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="section">
+            <h2 class="section-title">Technology Stack</h2>
+            <div class="tech-section">
+                <div class="tech-categories">
+                    <div class="tech-category">
+                        <h4>Frontend</h4>
+                        <ul class="tech-list">
+                            <li>React Native (Expo)</li>
+                            <li>TypeScript</li>
+                            <li>Expo Router (file-based routing)</li>
+                            <li>Redux Toolkit</li>
+                            <li>React-i18next (i18n)</li>
+                        </ul>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Backend & Database</h4>
+                        <ul class="tech-list">
+                            <li>Firebase Firestore</li>
+                            <li>Firebase Authentication</li>
+                            <li>Firebase Cloud Storage</li>
+                            <li>AsyncStorage (local persistence)</li>
+                        </ul>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Maps & Location</h4>
+                        <ul class="tech-list">
+                            <li>Leaflet.js (web)</li>
+                            <li>React Native Maps (native)</li>
+                            <li>Google Maps Integration</li>
+                        </ul>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Features</h4>
+                        <ul class="tech-list">
+                            <li>Progressive Web App (PWA)</li>
+                            <li>Service Workers</li>
+                            <li>Offline-first architecture</li>
+                            <li>Multi-layer caching</li>
+                            <li>Google OAuth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture -->
+        <section class="section">
+            <h2 class="section-title">System Architecture</h2>
+            <div class="architecture-diagram">
+                <div class="flow-step">
+                    <h4>1. User Action & State Management</h4>
+                    <p>User interactions trigger Redux dispatches, updating the global state with Redux Toolkit slices for catalogues, offers, basket, and favorites.</p>
+                </div>
+                <div class="flow-step">
+                    <h4>2. Middleware & Synchronization</h4>
+                    <p>Custom middleware intercepts actions to sync data with Firebase for authenticated users while maintaining local state consistency.</p>
+                </div>
+                <div class="flow-step">
+                    <h4>3. Firebase Integration</h4>
+                    <p>Firestore handles real-time data sync, Authentication manages user sessions, and Cloud Storage serves catalogue images and PDFs via global CDN.</p>
+                </div>
+                <div class="flow-step">
+                    <h4>4. Multi-Layer Caching</h4>
+                    <p>Memory cache → AsyncStorage → Firebase with smart invalidation (30min-1day TTL). Full offline read access with background sync when reconnected.</p>
+                </div>
+                <div class="flow-step">
+                    <h4>5. UI Rendering</h4>
+                    <p>React Native components re-render based on state changes, with optimized image loading, lazy loading, and RTL support via I18nManager.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Flows -->
+        <section class="section">
+            <h2 class="section-title">User Flows</h2>
+            <div class="use-cases">
+                <div class="use-case">
+                    <h4>👤 First-Time User</h4>
+                    <ol>
+                        <li>App launch → Sign-in screen</li>
+                        <li>Choose auth method (Google/Email/Guest)</li>
+                        <li>Location setup modal (select governorate)</li>
+                        <li>Browse home screen with featured offers</li>
+                        <li>Explore stores and catalogues</li>
+                    </ol>
+                </div>
+                <div class="use-case">
+                    <h4>📖 Browsing Catalogues</h4>
+                    <ol>
+                        <li>Navigate to Flyers tab</li>
+                        <li>Filter by category or store</li>
+                        <li>Select catalogue to view</li>
+                        <li>Swipe through pages with zoom</li>
+                        <li>View offer details → Add to basket</li>
+                    </ol>
+                </div>
+                <div class="use-case">
+                    <h4>🛍️ Shopping Journey</h4>
+                    <ol>
+                        <li>Browse and add offers to basket</li>
+                        <li>Navigate to Basket tab</li>
+                        <li>Adjust quantities, remove expired items</li>
+                        <li>View total savings estimate</li>
+                        <li>Visit store with shopping list</li>
+                    </ol>
+                </div>
+                <div class="use-case">
+                    <h4>⚙️ Admin Workflow</h4>
+                    <ol>
+                        <li>Access admin dashboard</li>
+                        <li>Upload catalogue (PDF/images)</li>
+                        <li>Set metadata (store, dates, category)</li>
+                        <li>Use interactive grid to add offers</li>
+                        <li>Publish and manage content</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="section">
+            <h2 class="section-title">Product Roadmap</h2>
+            <div class="roadmap">
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <span class="phase-badge phase-completed">✓ Phase 1 - Completed</span>
+                        <h3>Core Platform</h3>
+                    </div>
+                    <ul class="phase-items">
+                        <li>Digital catalogue browsing with PDF support</li>
+                        <li>Offer management and category system</li>
+                        <li>Shopping basket and favorites</li>
+                        <li>Advanced search functionality</li>
+                        <li>Admin dashboard and tools</li>
+                        <li>Firebase integration and offline support</li>
+                        <li>Full Arabic RTL implementation</li>
+                    </ul>
+                </div>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <span class="phase-badge phase-progress">🔄 Phase 2 - In Progress</span>
+                        <h3>Enhanced Engagement (Q1 2025)</h3>
+                    </div>
+                    <ul class="phase-items">
+                        <li>Push notifications for new offers</li>
+                        <li>Price alerts and deal notifications</li>
+                        <li>Shopping list feature with reminders</li>
+                        <li>Social sharing integration</li>
+                        <li>User reviews and ratings</li>
+                    </ul>
+                </div>
+
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <span class="phase-badge phase-planned">📋 Phase 3 - Planned</span>
+                        <h3>Advanced Features (Q2 2025)</h3>
+                    </div>
+                    <ul class="phase-items">
+                        <li>Barcode scanner for product lookup</li>
+                        <li>Store availability checker</li>
+                        <li>AI-powered personalized recommendations</li>
+                        <li>Loyalty program integration</li>
+                        <li>Price comparison across stores</li>
+                        <li>Budget tracking and analytics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>Want to Build Something Similar?</h2>
+            <p>
+                Whether you need a retail platform, healthcare solution, or data analytics system - Medlytics-Solutions can help transform your vision into reality.
+            </p>
+            <div class="hero-buttons">
+                <a href="index.html#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="index.html" class="btn btn-secondary">View All Projects</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
