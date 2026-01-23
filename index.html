@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medlytics-Solutions - Medical, Data & Retail Solutions</title>
+    <meta name="description" content="Egyptian-based digital solutions company specializing in healthcare technology, data analytics, and retail platforms">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --secondary: #0891b2;
+            --accent: #dc2626;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Section Styles */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-top: -2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .service-description {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .service-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Featured Project */
+        .featured-project {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 4rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .project-hero {
+            background: linear-gradient(135deg, var(--accent) 0%, #b91c1c 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-hero h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .project-content {
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .project-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .project-description {
+            color: var(--dark);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .project-features {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .project-features li {
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            padding-left: 2rem;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .project-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0.7rem;
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .project-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .info-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--gray);
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-cta {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .project-cta:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item a {
+            color: var(--success);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card, .featured-project {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">M</div>
+                <span>Medlytics-Solutions</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="location-badge">
+                📍 Cairo, Egypt
+            </div>
+            <h1>Digital Solutions for Healthcare, Data & Retail</h1>
+            <p>Empowering Egyptian businesses with innovative technology solutions across medical, data analytics, and retail sectors</p>
+            <a href="#contact" class="cta-button">Partner With Us</a>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Industry Verticals</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Egyptian Market Focus</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">2016</span>
+                    <span class="stat-label">Established</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">Our Solutions</h2>
+        <p class="section-subtitle">Comprehensive digital transformation services tailored for the Egyptian market</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏥</div>
+                <h3 class="service-title">Medical Solutions</h3>
+                <p class="service-description">
+                    Advanced healthcare technology platforms designed for Egyptian medical institutions and healthcare providers.
+                </p>
+                <ul class="service-features">
+                    <li>Clinical decision support systems</li>
+                    <li>Healthcare AI/ML applications</li>
+                    <li>Digital health platforms</li>
+                    <li>EHR integration & interoperability</li>
+                    <li>Medical data visualization</li>
+                    <li>Telemedicine solutions</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3 class="service-title">Data Analytics</h3>
+                <p class="service-description">
+                    Transform your data into actionable insights with our specialized analytics platforms and business intelligence tools.
+                </p>
+                <ul class="service-features">
+                    <li>Healthcare data analytics (DRG, ICD-10, ATC)</li>
+                    <li>Population health insights</li>
+                    <li>Business intelligence dashboards</li>
+                    <li>Predictive analytics & ML models</li>
+                    <li>Real-time reporting systems</li>
+                    <li>Data warehouse solutions</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <h3 class="service-title">Retail Solutions</h3>
+                <p class="service-description">
+                    Modern retail technology platforms connecting Egyptian consumers with local and national supermarket chains.
+                </p>
+                <ul class="service-features">
+                    <li>Mobile commerce applications</li>
+                    <li>Digital catalogue platforms</li>
+                    <li>Consumer engagement tools</li>
+                    <li>Location-based services</li>
+                    <li>Multi-language support (Arabic/English)</li>
+                    <li>Real-time offer management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Project -->
+    <section id="projects">
+        <h2 class="section-title">Featured Project</h2>
+        
+        <div class="featured-project">
+            <div class="project-hero">
+                <div class="project-badge">🎯 Flagship Product</div>
+                <h3>Daily Deals - دليل العروض</h3>
+                <p>Egypt's Premier Digital Catalogue Platform</p>
+            </div>
+            
+            <div class="project-content">
+                <div class="project-main">
+                    <p class="project-description">
+                        Daily Deals is a comprehensive mobile and web application that revolutionizes how Egyptian consumers discover and save on supermarket offers. Built specifically for the Egyptian market, it aggregates promotional catalogues from national chains like Carrefour, Metro, and Spinneys, alongside local stores across Sharkia, Dakahlia, and Cairo governorates.
+                    </p>
+                    
+                    <h4 style="color: var(--dark); font-size: 1.3rem;">Key Features</h4>
+                    <ul class="project-features">
+                        <li>Smart location-based filtering by governorate and city</li>
+                        <li>Interactive PDF catalogue viewer with zoom & navigation</li>
+                        <li>Multi-store shopping basket with price tracking</li>
+                        <li>Advanced search across stores, catalogues & offers</li>
+                        <li>Favorites system for stores and categories</li>
+                        <li>Real-time offer expiration tracking</li>
+                        <li>Full RTL support for Arabic interface</li>
+                        <li>Offline-first architecture with smart caching</li>
+                        <li>Admin dashboard for catalogue management</li>
+                        <li>Google Maps integration for store locations</li>
+                    </ul>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">Expo</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Redux Toolkit</span>
+                        <span class="tech-tag">React-i18next</span>
+                        <span class="tech-tag">Leaflet.js</span>
+                    </div>
+                    
+                    <a href="daily-deals.html" class="project-cta">View Full Project Details →</a>
+                </div>
+                
+                <div class="project-sidebar">
+                    <div class="info-box">
+                        <h4>Project Stats</h4>
+                        <div class="info-item">
+                            <span class="info-label">Active Users</span>
+                            <span class="info-value">50K+</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Store Partners</span>
+                            <span class="info-value">15+</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Catalogues</span>
+                            <span class="info-value">500+</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Cities Covered</span>
+                            <span class="info-value">20+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h4>Platforms</h4>
+                        <div class="info-item">
+                            <span class="info-label">Web</span>
+                            <span class="info-value">✓ Live</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Android</span>
+                            <span class="info-value">✓ Available</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">iOS</span>
+                            <span class="info-value">Coming Soon</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h4>Languages</h4>
+                        <div class="info-item">
+                            <span class="info-label">Arabic</span>
+                            <span class="info-value">✓ Full RTL</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">English</span>
+                            <span class="info-value">✓ Supported</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="contact-content">
+            <h2>Let's Build Something Amazing Together</h2>
+            <p style="margin-bottom: 2rem; opacity: 0.9;">
+                Whether you need medical technology, data analytics, or retail solutions - we're here to transform your business with cutting-edge digital solutions.
+            </p>
+            <div class="contact-methods">
+                <div class="contact-item">
+                    <strong>Email</strong>
+                    <a href="mailto:info@medlytics-solutions.com">info@medlytics-solutions.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>Phone</strong>
+                    <a href="tel:+201208433361">+20 1208433361</a>
+                </div>
+                <div class="contact-item">
+                    <strong>Location</strong>
+                    <span style="color: var(--success);">Cairo, Egypt</span>
+                </div>
+                <div class="contact-item">
+                    <strong>LinkedIn</strong>
+                    <a href="https://linkedin.com/company/medlytics-solutions" target="_blank">Connect With Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2016-2025 Medlytics-Solutions. Digital Innovation in Healthcare, Data & Retail.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            Established 2016 | Cairo, Egypt | Serving the Egyptian Market
+        </p>
+    </footer>
+</body>
+</html>
